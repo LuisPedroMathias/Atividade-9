@@ -2,6 +2,18 @@
 
 include "infra/conexao.php";
 
+$filtro_cliente = isset($_GET["nome_cliente"]) ? $_GET["nome_cliente"] : "";
+
+if ($filtro_cliente !== "") {
+    $sql = "SELECT idpet, nome_pet, raca, nome_cliente FROM pet WHERE nome_cliente = ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $filtro_cliente);
+    mysqli_stmt_execute($stmt);
+    $pets = mysqli_stmt_get_result($stmt);
+} else {
+    $pets = mysqli_query($conexao, "SELECT idpet, nome_pet, raca, nome_cliente FROM pet");
+}
+
 $clientes = mysqli_query($conexao, "SELECT nome_cliente FROM clientes");
 
 if (!$clientes) {
@@ -45,6 +57,21 @@ if (!$pets) {
                     <th>Cliente</th>
                     <th>Ações</th>  
                 </tr>
+
+                <form action="" method="GET">
+                    <label for="nome_cliente_filtro">Cliente:</label>
+                    <select name="nome_cliente" id="nome_cliente_filtro">
+                        <option value="">Todos</option>
+                        <?php
+                        mysqli_data_seek($clientes, 0);
+                        while ($cliente = mysqli_fetch_assoc($clientes)) { ?>
+                            <option value="<?php echo htmlspecialchars($cliente["nome_cliente"]) ?>" <?php echo ($cliente["nome_cliente"] == $filtro_cliente) ? "selected" : "" ?>>
+                                <?php echo htmlspecialchars($cliente["nome_cliente"]) ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                    <button type="submit">Filtrar</button>
+                </form>
 
                 <?php while ($pet = mysqli_fetch_assoc($pets)) { ?>
                     <tr>

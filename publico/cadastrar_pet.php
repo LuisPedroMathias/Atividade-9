@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Erro ao preparar a consulta: ' . mysqli_error($conexao));
     }
 
-    mysqli_stmt_bind_param($stmt, 'ss', $nome_cliente, $email);
+    mysqli_stmt_bind_param($stmt, 'sss', $nome_pet, $raca, $nome_cliente);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "Pet cadastrado com sucesso!";
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <h2>Cadastrar Pet!</h2>
-    <form action="public/cadastrar_pet.php" method="POST">
+    <form method="POST">
         <label for="nome_pet">Nome:</label>
         <input type="text" id="nome_pet" name="nome_pet" required>
         <br>

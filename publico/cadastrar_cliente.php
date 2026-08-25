@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <h2>Cadastrar Cliente!</h2>
 
-    <form action="public/cadastrar_cliente.php" method="POST">
+    <form method="POST">
         <label for="nome_cliente">Nome:</label>
         <input type="text" id="nome_cliente" name="nome_cliente" required>
         <br>
@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="email" id="email" name="email" required>
         <br>
         <button type="submit">Cadastrar</button>
+
 </form>
 </body>
 </html>
