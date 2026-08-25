@@ -48,6 +48,33 @@ if (!$pets) {
     <button type="button" onclick="window.location.href='publico/cadastrar_cliente.php'">Cadastrar Cliente</button>
 
         <div>
+
+            <h2>Clientes Cadastrados</h2>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+                <?php $clientes = mysqli_query($conexao, "SELECT nome_cliente, email FROM clientes"); ?>
+                <?php while ($cliente = mysqli_fetch_assoc($clientes)) { ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($cliente["nome_cliente"]) ?></td>
+                        <td><?php echo htmlspecialchars($cliente["email"]) ?></td>
+                        <td>
+                            <a href="publico/editar_cliente.php?nome_cliente=<?php echo urlencode($cliente["nome_cliente"]) ?>">Editar</a>
+                            <a href="publico/deletar_cliente.php?nome_cliente=<?php echo urlencode($cliente["nome_cliente"]) ?>">Excluir</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+
+        </div>
+
+
+
+        <div>
             <h2>Pets Cadastrados</h2>
             <table>
                 <tr>
