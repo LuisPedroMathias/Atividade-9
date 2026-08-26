@@ -5,16 +5,16 @@ include "infra/conexao.php";
 $filtro_cliente = isset($_GET["nome_cliente"]) ? $_GET["nome_cliente"] : "";
 
 if ($filtro_cliente !== "") {
-    $sql = "SELECT idpet, nome_pet, raca, nome_cliente FROM pet WHERE nome_cliente = ?";
+    $sql = "SELECT idpet, nome_pet, raca, idcliente FROM pet WHERE idcliente = ?";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, "s", $filtro_cliente);
     mysqli_stmt_execute($stmt);
     $pets = mysqli_stmt_get_result($stmt);
 } else {
-    $pets = mysqli_query($conexao, "SELECT idpet, nome_pet, raca, nome_cliente FROM pet");
+    $pets = mysqli_query($conexao, "SELECT idpet, nome_pet, raca, idcliente FROM pet");
 }
 
-$clientes = mysqli_query($conexao, "SELECT nome_cliente FROM clientes");
+$clientes = mysqli_query($conexao, "SELECT idcliente, nome_cliente FROM clientes");
 
 if (!$clientes) {
     die("Erro na consulta: " . mysqli_error($conexao));

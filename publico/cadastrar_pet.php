@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $raca = $_POST['raca'] ?? '';
     $nome_cliente = $_POST['nome_cliente'] ?? '';
 
-    $sql = "INSERT INTO pet (nome_pet, raca, nome_cliente) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO pet (nome_pet, raca, idcliente) VALUES (?, ?, ?)";
     $stmt = mysqli_prepare($conexao, $sql);
 
     if ($stmt === false) {
