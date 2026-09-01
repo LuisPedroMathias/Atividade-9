@@ -109,8 +109,8 @@ if (!$pets) {
                         <td><?php echo htmlspecialchars($pet["raca"]) ?></td>
                         <td><?php echo htmlspecialchars($pet["idcliente"]) ?></td>
                         <td>
-                            <a href="public/editar.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Editar</a>
-                            <a href="public/deletar.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Excluir</a>
+                            <a href="publico/editar_pet.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Editar</a>
+                            <a href="publico/deletar_pet.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php } ?>
