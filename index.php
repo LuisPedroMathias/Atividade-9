@@ -52,14 +52,16 @@ if (!$pets) {
             <h2>Clientes Cadastrados</h2>
             <table>
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Telefone</th>
                     <th>Ações</th>
                 </tr>
-                <?php $clientes = mysqli_query($conexao, "SELECT nome_cliente, email FROM clientes"); ?>
+                <?php $clientes = mysqli_query($conexao, "SELECT idcliente, nome_cliente, email FROM clientes"); ?>
                 <?php while ($cliente = mysqli_fetch_assoc($clientes)) { ?>
                     <tr>
+                        <td><?php echo htmlspecialchars($cliente["idcliente"]) ?></td>
                         <td><?php echo htmlspecialchars($cliente["nome_cliente"]) ?></td>
                         <td><?php echo htmlspecialchars($cliente["email"]) ?></td>
                         <td>
@@ -105,7 +107,7 @@ if (!$pets) {
                         <td><?php echo htmlspecialchars($pet["idpet"]) ?></td>
                         <td><?php echo htmlspecialchars($pet["nome_pet"]) ?></td>
                         <td><?php echo htmlspecialchars($pet["raca"]) ?></td>
-                        <td><?php echo htmlspecialchars($pet["nome_cliente"]) ?></td>
+                        <td><?php echo htmlspecialchars($pet["idcliente"]) ?></td>
                         <td>
                             <a href="public/editar.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Editar</a>
                             <a href="public/deletar.php?idpet=<?php echo urlencode($pet["idpet"]) ?>">Excluir</a>

@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome_pet = $_POST['nome_pet'] ?? '';
     $raca = $_POST['raca'] ?? '';
     $nome_cliente = $_POST['nome_cliente'] ?? '';
+    $idcliente = $_POST['idcliente'] ?? '';
 
     $sql = "INSERT INTO pet (nome_pet, raca, idcliente) VALUES (?, ?, ?)";
     $stmt = mysqli_prepare($conexao, $sql);
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Erro ao preparar a consulta: ' . mysqli_error($conexao));
     }
 
-    mysqli_stmt_bind_param($stmt, 'sss', $nome_pet, $raca, $nome_cliente);
+   mysqli_stmt_bind_param($stmt, 'ssi', $nome_pet, $raca, $idcliente);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "Pet cadastrado com sucesso!";
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-<h2>Cadastrar Pet!</h2>
+    <h2>Cadastrar Pet!</h2>
     <form method="POST">
         <label for="nome_pet">Nome:</label>
         <input type="text" id="nome_pet" name="nome_pet" required>
@@ -51,14 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" id="raca" name="raca" required>
         <br>
         <label for="nome_cliente">Cliente:</label>
-        <select name="nome_cliente" id="nome_cliente" required>
-            <?php $clientes = mysqli_query($conexao, "SELECT nome_cliente FROM clientes"); ?>
+        <select name="idcliente" id="idcliente" required>
+            <?php $clientes = mysqli_query($conexao, "SELECT idcliente, nome_cliente FROM clientes"); ?>
             <?php while ($cliente = mysqli_fetch_assoc($clientes)) { ?>
-                <option value="<?php echo $cliente["nome_cliente"] ?>"><?php echo $cliente["nome_cliente"] ?></option>
+                <option value="<?php echo $cliente["idcliente"] ?>"><?php echo htmlspecialchars($cliente["nome_cliente"]) ?></option>
             <?php } ?>
         </select>
         <br>
         <button type="submit">Cadastrar</button>
     </form>
 </body>
+
 </html>

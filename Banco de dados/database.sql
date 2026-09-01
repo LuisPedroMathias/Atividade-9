@@ -12,5 +12,7 @@ CREATE TABLE pet (
     nome_pet VARCHAR(200) NOT NULL,
     raca VARCHAR(100) NOT NULL,
     idcliente INT,
-    FOREIGN KEY (idcliente) REFERENCES clientes(idcliente)
+    nome_cliente VARCHAR(200) NOT NULL,
+    FOREIGN KEY (idcliente) REFERENCES clientes(idcliente),
+    FOREIGN KEY (nome_cliente) REFERENCES clientes(nome_cliente)
 );
