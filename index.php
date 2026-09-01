@@ -66,7 +66,7 @@ if (!$pets) {
                         <td><?php echo htmlspecialchars($cliente["email"]) ?></td>
                         <td>
                             <a href="publico/editar_cliente.php?nome_cliente=<?php echo urlencode($cliente["nome_cliente"]) ?>">Editar</a>
-                            <a href="publico/deletar_cliente.php?nome_cliente=<?php echo urlencode($cliente["nome_cliente"]) ?>">Excluir</a>
+                            <a href="publico/deletar_cliente.php?idcliente=<?php echo urlencode($cliente["idcliente"]) ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php } ?>
